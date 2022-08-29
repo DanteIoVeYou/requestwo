@@ -14,6 +14,8 @@ public:
     ~Requestwo();
 
 private:
+
+public:
     std::string m_domain;
     std::string m_ip;
 };

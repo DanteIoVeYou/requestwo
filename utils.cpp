@@ -12,9 +12,9 @@ bool Utils::IsDomain(std::string domain) {
     }
 }
 
-bool Utils::HasNumber(std::string str) {
+bool Utils::HasNumber(const std::string &str) {
     for(const auto &ch: str) {
-        if(ch >= '0' || ch <= '9') {
+        if(ch >= '0' && ch <= '9') {
             return true;
         }
     }

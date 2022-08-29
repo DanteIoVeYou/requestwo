@@ -9,5 +9,5 @@
 class Utils {
 public:
     static bool IsDomain(std::string domain);
-    static bool HasNumber(std::string str);
+    static bool HasNumber(const std::string &str);
 };
