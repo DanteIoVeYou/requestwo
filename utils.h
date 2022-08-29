@@ -7,7 +7,7 @@
 
 
 class Utils {
-
 public:
-    static bool JudgeDomain(std::string domain);
+    static bool IsDomain(std::string domain);
+    static bool HasNumber(std::string str);
 };

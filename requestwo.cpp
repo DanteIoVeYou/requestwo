@@ -2,7 +2,7 @@
 
 Requestwo::Requestwo(std::string domain): m_domain(domain) {
         // 判断入参是否为域名
-        if(Utils::JudgeDomain(domain)) {
+        if(Utils::isDomain(domain)) {
             // 入参是域名，则解析出对于的ip
             m_ip = Socket::Domain2Ip(domain);
         }
