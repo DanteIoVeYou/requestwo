@@ -10,12 +10,53 @@
 
 class Requestwo {
 public:
-    Requestwo(std::string domain);
+    /**
+     * @brief Construct a new Requestwo object 入参为url的构造函数
+     * 
+     * @param url 
+     */
+    Requestwo(std::string url);
+
+    /**
+     * @brief Destroy the Requestwo object 析构函数
+     * 
+     */
     ~Requestwo();
 
-private:
-
 public:
+    /**
+     * @brief URL 
+     * 
+     */
+    std::string m_url;
+    /**
+     * @brief 协议 
+     * 
+     */
+    std::string m_protocol;
+    /**
+     * @brief 域名 
+     * 
+     */
     std::string m_domain;
+    /**
+     * @brief ip地址
+     * 
+     */
     std::string m_ip;
+    /**
+     * @brief 端口号
+     * 
+     */
+    std::string m_port;
+    /**
+     * @brief 资源路由
+     * 
+     */
+    std::string m_path;
+    /**
+     * @brief 查询词 
+     * 
+     */
+    std::string m_query;
 };

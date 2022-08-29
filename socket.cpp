@@ -1,5 +1,12 @@
 #include "socket.h"
 
+
+/**
+ * @brief 域名解析
+ * 
+ * @param domain 
+ * @return std::string 
+ */
 std::string Socket::Domain2Ip(std::string domain) {
     struct hostent *host = gethostbyname(domain.c_str());
     if(host == nullptr) {
@@ -12,6 +19,12 @@ std::string Socket::Domain2Ip(std::string domain) {
     }
 }
 
+
+/**
+ * @brief Create a Socket object 创建套接字
+ * 
+ * @return int 
+ */
 int Socket::CreateSocket() {
     int fd = socket(AF_INET, SOCK_STREAM, 0);
     if(fd < 0 ) {
@@ -21,6 +34,14 @@ int Socket::CreateSocket() {
     return fd;
 }
 
+
+/**
+ * @brief 连接远端
+ * 
+ * @param fd 
+ * @param ip 
+ * @param port 
+ */
 void Socket::Connect(int fd, std::string ip, uint16_t port) {
     sockaddr_in peer;
     bzero(&peer, sizeof(peer));

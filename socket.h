@@ -13,10 +13,27 @@
 
 class Socket {
 public:
-    // 域名解析
+    /**
+     * @brief 域名解析
+     * 
+     * @param domain 
+     * @return std::string 
+     */
     static std::string Domain2Ip(std::string domain);
-    // 创建套接字
+
+    /**
+     * @brief Create a Socket object 创建套接字
+     * 
+     * @return int 
+     */
     static int CreateSocket();
-    // 连接远端
+    
+    /**
+     * @brief 连接远端
+     * 
+     * @param fd 
+     * @param ip 
+     * @param port 
+     */
     static void Connect(int fd, std::string ip, uint16_t port);
 };
