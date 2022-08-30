@@ -1,11 +1,11 @@
-// #include "socket.cpp"
-#include "requestwo.h"
-#include <iostream>
+#include "unittest.h"
 int main()
 {
-    std::string domain = "www.imdanteking.com";
-    // std::cout << Socket::Domain2Ip(domain) << std::endl;
-    Requestwo requestwo = domain;
-    std::cout << requestwo.m_ip << std::endl;
+    UnitTest *unit_test = new UnitTest();
+    unit_test->TestParseURL1();
+    unit_test->TestParseURL2();
+    unit_test->TestParseURL3();
+    unit_test->TestParseURL4();
+    delete(unit_test);
     return 0;
 }

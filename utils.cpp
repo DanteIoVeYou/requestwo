@@ -18,13 +18,15 @@ void Utils::ParseUrl(const std::string &url, std::string *protocol, std::string 
     if (pos_protocol == std::string::npos) {
         // url不带协议, 默认填充为http协议
         *protocol = "http";
+        pos_protocol = 0;
     }
     else {
+        *protocol = url.substr(0, pos_protocol);
         pos_protocol += strlen("://");
     }
 
     // 解析端口
-    int pos_port = url.find(pos_protocol, ':');
+    int pos_port = url.find(':', pos_protocol);
     if(pos_port == std::string::npos) {
         // url中不包含端口号
         *port = "80";
@@ -52,10 +54,10 @@ void Utils::ParseUrl(const std::string &url, std::string *protocol, std::string 
     }
 
     // 解析路由
-    int pos_path = url.find(pos_protocol, '/');
+    int pos_path = url.find('/', pos_protocol);
     if(pos_path == std::string::npos) {
         // 路由缺失
-        *path = "/index.html"
+        *path = "/index.html";
     }
     else {
         // 路由存在

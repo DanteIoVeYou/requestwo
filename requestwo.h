@@ -9,6 +9,7 @@
 #include "socket.h"
 
 class Requestwo {
+
 public:
     /**
      * @brief Construct a new Requestwo object 入参为url的构造函数
@@ -23,7 +24,14 @@ public:
      */
     ~Requestwo();
 
-public:
+    /**
+     * @brief 以字符串的形式打印所有成员变量
+     * 
+     * @return std::string 
+     */
+    std::string ToString();
+
+private:
     /**
      * @brief URL 
      * 

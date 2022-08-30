@@ -38,4 +38,5 @@ public:
      * @return false 
      */
     static bool HasNumber(const std::string &str);
+    
 };
