@@ -1,7 +1,27 @@
 #pragma once
 #include<string>
+#include<unordered_map>
 
 struct httpRequest {
+
+    /**
+     * @brief Construct a new http Request object
+     * 
+     * @param http_request_map 
+     */
+    httpRequest(const std::unordered_map<std::string, std::string> &http_request_map) {
+        m_http_request_line_method = http_request_map["Method"];
+        m_http_request_line_path = http_request_map["Path"];
+        m_http_request_line_protocol_version = http_request_map["Version"];
+        m_http_request_header_host = http_request_map["Host"];
+        m_http_request_header_connection = http_request_map["Connection"];
+        m_http_request_header_content_length = http_request_map["ContentLength"];
+        m_http_request_header_content_type = http_request_map["ContentType"];
+        m_http_request_header_user_agent = http_request_map["UserAgent"];
+        m_http_request_header_accept = http_request_map["Accept"];
+        m_http_request_header_referer = http_request_map["Referer"];
+        m_http_request_header_accept_language = http_request_map["AcceptLanguage"];
+    }
 
     /**
      * @brief http请求行
