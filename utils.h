@@ -22,6 +22,16 @@ public:
     static void ParseUrl(const std::string &url, std::string *protocol, std::string *domain, std::string *port, std::string *path, std::string *query);
 
     /**
+     * @brief 域名解析为ip地址
+     * 
+     * @param domain 
+     * @param ip 
+     */
+    static void ParseIp(const std::string &domain, std::string *ip);
+
+
+private:
+    /**
      * @brief 判断入参是否为一个合法的domain 
      * 
      * @param domain 

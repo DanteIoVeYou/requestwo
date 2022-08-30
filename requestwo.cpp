@@ -9,15 +9,9 @@
 Requestwo::Requestwo(std::string url): m_url(url) {
         // 解析url
         Utils::ParseUrl(url, &m_protocol, &m_domain, &m_port, &m_path, &m_query);
-        // 判断m_domain是否为域名
-         if(Utils::IsDomain(m_domain)) {
-             //入参是域名，则解析出对于的ip
-             m_ip = Socket::Domain2Ip(m_domain);
-         }
-         else {
-             //入参是ip地址
-             m_ip = m_domain;
-         }
+        // 解析ip地址
+        Utils::ParseIp(m_domain, &m_ip);
+        // 读取配置文件
 }
 
 

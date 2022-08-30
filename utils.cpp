@@ -1,5 +1,5 @@
 #include "utils.h"
-
+#include "socket.h"
 
 /**
  * @brief 解析url, 获得协议、域名、ip地址、端口号、资源虚拟路径、查询字的信息
@@ -94,6 +94,25 @@ void Utils::ParseUrl(const std::string &url, std::string *protocol, std::string 
         // 端口号存在
         *domain = url.substr(pos_protocol, pos_port - pos_protocol);
     }
+}
+
+
+/**
+ * @brief 域名解析为ip地址
+ * 
+ * @param domain 
+ * @param ip 
+ */
+void Utils::ParseIp(const std::string &domain, std::string *ip) {
+        // 判断m_domain是否为域名
+         if(Utils::IsDomain(domain)) {
+             //入参是域名，则解析出对于的ip
+             *ip = Socket::Domain2Ip(domain);
+         }
+         else {
+             //入参是ip地址
+             *ip = domain;
+         }
 }
 
 
