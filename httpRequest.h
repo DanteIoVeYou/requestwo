@@ -51,6 +51,31 @@ struct HttpRequest {
     }
 
     /**
+     * @brief 
+     * 
+     * @return true 
+     * @return false 
+     */
+    bool Build() {
+
+
+    }
+
+    std::string GetRequestMessage() {
+        if(!Build()) {
+
+        }
+        else {
+
+        }
+    }
+
+    /**
+     * @brief http报文
+     * 
+     */
+    std::string m_http_reqeuest_message;
+    /**
      * @brief http请求行
      * 
      */
@@ -65,7 +90,7 @@ struct HttpRequest {
      * 
      */
     std::string m_http_request_line_path;
-    /**
+    /** 
      * @brief http请求行的http版本号 
      * 
      */
@@ -115,5 +140,6 @@ struct HttpRequest {
      * 
      */
     std::string m_http_request_header_accept_language;
+    const static 
 
 };

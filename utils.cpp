@@ -189,7 +189,6 @@ bool Utils::BuildHttpRequest(const std::string &filename, HttpRequest *req) {
     }
     else {
         *req = http_request_map;
-
     }
     return true;
 }
