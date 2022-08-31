@@ -2,14 +2,21 @@
 #include<string>
 #include<unordered_map>
 
-struct httpRequest {
+struct HttpRequest {
+
+    /**
+     * @brief Construct a new Http Request object
+     * 
+     */
+    HttpRequest() {}
+
 
     /**
      * @brief Construct a new http Request object
      * 
      * @param http_request_map 
      */
-    httpRequest(const std::unordered_map<std::string, std::string> &http_request_map) {
+    HttpRequest(std::unordered_map<std::string, std::string> &http_request_map) {
         m_http_request_line_method = http_request_map["Method"];
         m_http_request_line_path = http_request_map["Path"];
         m_http_request_line_protocol_version = http_request_map["Version"];
@@ -21,6 +28,26 @@ struct httpRequest {
         m_http_request_header_accept = http_request_map["Accept"];
         m_http_request_header_referer = http_request_map["Referer"];
         m_http_request_header_accept_language = http_request_map["AcceptLanguage"];
+    }
+
+    /**
+     * @brief 以字符串的形式打印成员函数
+     * 
+     * @return std::string 
+     */
+    std::string ToString() {
+        return 
+            "Method: " + m_http_request_line_method + "\n" + 
+            "Path: " + m_http_request_line_path + "\n" + 
+            "Version: " + m_http_request_line_protocol_version + "\n" + 
+            "Host: " + m_http_request_header_host + "\n" + 
+            "Connection: " + m_http_request_header_connection + "\n" + 
+            "ContentLength: " + m_http_request_header_content_length + "\n" +
+            "ContentType: " + m_http_request_header_content_type + "\n" +
+            "UserAgent: " + m_http_request_header_user_agent + "\n" + 
+            "Accept: " + m_http_request_header_accept + "\n" +
+            "Referer: " + m_http_request_header_referer + "\n" +
+            "AcceptLanguage: " + m_http_request_header_accept_language + "\n";
     }
 
     /**

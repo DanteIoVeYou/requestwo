@@ -5,8 +5,8 @@
  * @brief 配置文件名
  * 
  */
-const std::string configFileName = "httpRequest.config";
-const std::string commentMark = "#";
+const std::string Utils::configFileName = "httpRequest.config";
+const std::string Utils::commentMark = "#";
 
 /**
  * @brief 解析url, 获得协议、域名、ip地址、端口号、资源虚拟路径、查询字的信息
@@ -167,7 +167,7 @@ bool Utils::HasNumber(const std::string &str) {
  * @return true 
  * @return false 
  */
-bool Utils::BuildHttpRequest(const std::string &filename, httpRequest *req) {
+bool Utils::BuildHttpRequest(const std::string &filename, HttpRequest *req) {
     std::unordered_map<std::string, std::string> http_request_map = {
         {"Method", ""},
         {"Path", ""},
@@ -188,7 +188,7 @@ bool Utils::BuildHttpRequest(const std::string &filename, httpRequest *req) {
 
     }
     else {
-        *req = req(http_request_map);
+        *req = http_request_map;
 
     }
     return true;
@@ -281,7 +281,7 @@ bool Utils::IsComment(const std::string &line, const std::string &mark) {
  * @return true 
  * @return false 
  */
-bool Utils::IsSpaceLine(const std::string &line) {
+bool Utils::IsBlankLine(const std::string &line) {
     return (line.size() == 0);
 }
 

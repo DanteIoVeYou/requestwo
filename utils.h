@@ -40,7 +40,7 @@ public:
      * @return true 
      * @return false 
      */
-    static bool BuildHttpRequest(const std::string &filename, httpRequest *req);
+    static bool BuildHttpRequest(const std::string &filename, HttpRequest *req);
 
     /**
      * @brief 读取配置文件，将键值对存入哈希表 

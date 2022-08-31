@@ -57,3 +57,17 @@ bool UnitTest::TestParseURL4() {
     std::cout << req.ToString() << std::endl;
     return true;
 }
+
+
+/**
+ * @brief 测试从配置文件读取配置项并构建http请求报文结构体
+ * 
+ * @return true 
+ * @return false 
+ */
+bool UnitTest::TestBuildHttpRequest() {
+    HttpRequest *req = new HttpRequest();
+    Utils::BuildHttpRequest("httpRequest.config", req);
+    std::cout << req->ToString() << std::endl;
+    return true;
+}

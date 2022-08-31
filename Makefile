@@ -1,5 +1,5 @@
 CC=g++
-cli:main.cpp requestwo.cpp utils.cpp socket.cpp unittest.cpp 
+cli:main.cpp requestwo.cpp utils.cpp socket.cpp unittest.cpp
 	$(CC) -o $@ $^ 
 .PHONY:clean
 clean:

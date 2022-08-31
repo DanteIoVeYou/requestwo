@@ -38,6 +38,15 @@ public:
     bool TestParseURL4();
 
     /**
+     * @brief 
+     * 
+     * @return true 
+     * @return false 
+     */
+    bool TestBuildHttpRequest();
+
+public:
+    /**
      * @brief a unittest URL
      * 
      */
