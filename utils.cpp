@@ -7,6 +7,7 @@
  */
 const std::string Utils::configFileName = "httpRequest.config";
 const std::string Utils::commentMark = "#";
+const std::string Utils::LF = "\r\n";
 
 /**
  * @brief 解析url, 获得协议、域名、ip地址、端口号、资源虚拟路径、查询字的信息
@@ -157,40 +158,6 @@ bool Utils::HasNumber(const std::string &str) {
         }
     }
     return false;
-}
-
-/**
- * @brief 读取配置文件，构建http请求结构体 
- * 
- * @param filename 配置文件名
- * @param req httpRequest实例指针 
- * @return true 
- * @return false 
- */
-bool Utils::BuildHttpRequest(const std::string &filename, HttpRequest *req) {
-    std::unordered_map<std::string, std::string> http_request_map = {
-        {"Method", ""},
-        {"Path", ""},
-        {"Version", ""},
-        {"Host", ""},
-        {"Connection", ""},
-        {"ContentLength", ""},
-        {"ContentType", ""},
-        {"UserAgent", ""},
-        {"Accept", ""},
-        {"Referer", ""},
-        {"AcceptLanguage", ""}
-    };
-
-    int ret = ReadConfigFile(filename, http_request_map);
-    if(!ret) {
-        // error
-
-    }
-    else {
-        *req = http_request_map;
-    }
-    return true;
 }
 
 

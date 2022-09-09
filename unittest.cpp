@@ -66,8 +66,6 @@ bool UnitTest::TestParseURL4() {
  * @return false 
  */
 bool UnitTest::TestBuildHttpRequest() {
-    HttpRequest *req = new HttpRequest();
-    Utils::BuildHttpRequest("httpRequest.config", req);
-    std::cout << req->ToString() << std::endl;
+
     return true;
 }

@@ -6,7 +6,6 @@
 #include <unordered_map>
 #include <cstdlib>
 #include <cstring>
-#include "httpRequest.h"
 
 
 class Utils {
@@ -31,16 +30,6 @@ public:
      * @param ip 
      */
     static void ParseIp(const std::string &domain, std::string *ip);
-
-    /**
-     * @brief 读取配置文件，构建http请求结构体 
-     * 
-     * @param filename 配置文件名
-     * @param req httpRequest实例指针 
-     * @return true 
-     * @return false 
-     */
-    static bool BuildHttpRequest(const std::string &filename, HttpRequest *req);
 
     /**
      * @brief 读取配置文件，将键值对存入哈希表 
@@ -102,7 +91,7 @@ private:
      */
     static bool IsBlankLine(const std::string &line);
 
-private:
+public:
     /**
      * @brief 配置文件名
      *
@@ -114,4 +103,11 @@ private:
      * 
      */
     const static std::string commentMark;
+
+    /**
+     * @brief 回车换行
+     * 
+     */
+    const static std::string LF;
+
 };

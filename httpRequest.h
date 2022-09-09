@@ -1,6 +1,8 @@
 #pragma once
 #include<string>
 #include<unordered_map>
+#include <algorithm>
+#include "utils.h"
 
 struct HttpRequest {
 
@@ -16,18 +18,10 @@ struct HttpRequest {
      * 
      * @param http_request_map 
      */
-    HttpRequest(std::unordered_map<std::string, std::string> &http_request_map) {
-        m_http_request_line_method = http_request_map["Method"];
-        m_http_request_line_path = http_request_map["Path"];
-        m_http_request_line_protocol_version = http_request_map["Version"];
-        m_http_request_header_host = http_request_map["Host"];
-        m_http_request_header_connection = http_request_map["Connection"];
-        m_http_request_header_content_length = http_request_map["ContentLength"];
-        m_http_request_header_content_type = http_request_map["ContentType"];
-        m_http_request_header_user_agent = http_request_map["UserAgent"];
-        m_http_request_header_accept = http_request_map["Accept"];
-        m_http_request_header_referer = http_request_map["Referer"];
-        m_http_request_header_accept_language = http_request_map["AcceptLanguage"];
+    HttpRequest() {
+
+
+        std::transform(m_http_request_line_method.begin(), m_http_request_line_method.end(), m_http_request_line_method.begin(), ::toupper);
     }
 
     /**
@@ -50,24 +44,100 @@ struct HttpRequest {
             "AcceptLanguage: " + m_http_request_header_accept_language + "\n";
     }
 
+    bool ParseConfigFile() {
+        std::unordered_map<std::string, std::string> http_request_map = {
+            {"Method", ""},
+            {"Path", ""},
+            {"Version", ""},
+            {"Host", ""},
+            {"Connection", ""},
+            {"ContentLength", ""},
+            {"ContentType", ""},
+            {"UserAgent", ""},
+            {"Accept", ""},
+            {"Referer", ""},
+            {"AcceptLanguage", ""}
+        };
+        Utils::ReadConfigFile(Utils::configFileName, http_request_map);
+        m_http_request_line_method = http_request_map["Method"];
+        m_http_request_line_path = http_request_map["Path"];
+        m_http_request_line_protocol_version = http_request_map["Version"];
+        m_http_request_header_host = http_request_map["Host"];
+        m_http_request_header_connection = http_request_map["Connection"];
+        m_http_request_header_content_length = http_request_map["ContentLength"];
+        m_http_request_header_content_type = http_request_map["ContentType"];
+        m_http_request_header_user_agent = http_request_map["UserAgent"];
+        m_http_request_header_accept = http_request_map["Accept"];
+        m_http_request_header_referer = http_request_map["Referer"];
+        m_http_request_header_accept_language = http_request_map["AcceptLanguage"];
+        return true;
+    }
+
+    std::string GetRequestMessage() {
+        if(!BuildHttpRequest()) {
+
+        }
+        else {
+            return m_http_reqeuest_message;
+        }
+    }
+    
+    bool BuildHttpRequestLine() {
+        m_http_request_line += m_http_request_line_method;
+        m_http_request_line += " ";
+        m_http_request_line += m_http_request_line_path;
+        m_http_request_line += " ";
+        m_http_request_line += m_http_request_line_protocol_version;
+        m_http_request_line += Utils::LF;
+        return true;
+    }
+
+    bool BuildHttpRequestHeader() {
+        m_http_request_header += m_http_request_header_host;
+        m_http_request_line += Utils::LF;
+        m_http_request_header += m_http_request_header_connection;
+        m_http_request_line += Utils::LF;
+        m_http_request_header += m_http_request_header_content_length;
+        m_http_request_line += Utils::LF;
+        m_http_request_header += m_http_request_header_content_type;
+        m_http_request_line += Utils::LF;
+        m_http_request_header += m_http_request_header_user_agent;
+        m_http_request_line += Utils::LF;
+        m_http_request_header += m_http_request_header_accept;
+        m_http_request_line += Utils::LF;
+        m_http_request_header += m_http_request_header_referer;
+        m_http_request_line += Utils::LF;
+        m_http_request_header += m_http_request_header_accept_language;
+        m_http_request_line += Utils::LF;
+        return true;
+    }
+
+    bool BuildHttpRequestBody() {
+
+    }
+
+    bool BuildBlankLine() {
+        m_http_reqeuest_blankline = Utils::LF;
+    }
+
     /**
      * @brief 
      * 
      * @return true 
      * @return false 
      */
-    bool Build() {
-
-
-    }
-
-    std::string GetRequestMessage() {
-        if(!Build()) {
-
+    bool BuildHttpRequest () {
+        ParseConfigFile();
+        BuildHttpRequestLine();
+        BuildHttpRequestHeader();
+        BuildBlankLine();
+        if(m_http_request_line_method == "POST") {
+            BuildHttpRequestBody();
         }
-        else {
-
-        }
+        m_http_reqeuest_message += m_http_request_line;
+        m_http_reqeuest_message += m_http_request_header;
+        m_http_reqeuest_message += m_http_reqeuest_blankline;
+        m_http_reqeuest_message += m_http_reqeuest_body;
     }
 
     /**
@@ -140,6 +210,14 @@ struct HttpRequest {
      * 
      */
     std::string m_http_request_header_accept_language;
-    const static 
-
+    /**
+     * @brief 空行
+     * 
+     */
+    std::string m_http_reqeuest_blankline;
+    /**
+     * @brief http请求报头的请求体 
+     * 
+     */
+    std::string m_http_reqeuest_body;
 };
