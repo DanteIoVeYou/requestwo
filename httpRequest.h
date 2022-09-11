@@ -93,12 +93,36 @@ struct HttpRequest {
     }
 
     /**
-     * @brief 构建请求报头
+     * @brief 构建GET方法的请求报头
      * 
      * @return true 
      * @return false 
      */
-    bool BuildHttpRequestHeader() {
+    bool BuildHttpRequestHeaderGET() {
+        m_http_request_header += "Host: " + m_http_request_header_host;
+        m_http_request_header += Utils::LF;
+        m_http_request_header += "Connection: " + m_http_request_header_connection;
+        m_http_request_header += Utils::LF;
+        m_http_request_header += "Content-Type: " + m_http_request_header_content_type;
+        m_http_request_header += Utils::LF;
+        m_http_request_header += "User-Agent: " + m_http_request_header_user_agent;
+        m_http_request_header += Utils::LF;
+        m_http_request_header += "Accept: " + m_http_request_header_accept;
+        m_http_request_header += Utils::LF;
+        m_http_request_header += "Referer: " + m_http_request_header_referer;
+        m_http_request_header += Utils::LF;
+        m_http_request_header += "Accept-Language: " + m_http_request_header_accept_language;
+        m_http_request_header += Utils::LF;
+        return true;
+    }
+
+    /**
+     * @brief 构建POST方法的请求报头
+     * 
+     * @return true 
+     * @return false 
+     */
+    bool BuildHttpRequestHeaderPOST() {
         m_http_request_header += "Host: " + m_http_request_header_host;
         m_http_request_header += Utils::LF;
         m_http_request_header += "Connection: " + m_http_request_header_connection;
@@ -147,9 +171,13 @@ struct HttpRequest {
     bool BuildHttpRequest () {
         ParseConfigFile();
         BuildHttpRequestLine();
-        BuildHttpRequestHeader();
-        BuildBlankLine();
-        if(m_http_request_line_method == "POST") {
+        if(m_http_request_line_method == "GET") {
+            BuildHttpRequestHeaderGET();
+            BuildBlankLine();
+        }
+        else if(m_http_request_line_method == "POST") {
+            BuildHttpRequestHeaderPOST();
+            BuildBlankLine();
             BuildHttpRequestBody();
         }
         m_http_reqeuest_message += m_http_request_line;
