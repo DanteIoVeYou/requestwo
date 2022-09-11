@@ -10,14 +10,6 @@ struct HttpRequest {
      * @brief Construct a new Http Request object
      * 
      */
-    HttpRequest() {}
-
-
-    /**
-     * @brief Construct a new http Request object
-     * 
-     * @param http_request_map 
-     */
     HttpRequest() {
         std::transform(m_http_request_line_method.begin(), m_http_request_line_method.end(), m_http_request_line_method.begin(), ::toupper);
     }
@@ -48,12 +40,7 @@ struct HttpRequest {
      * @return std::string 
      */
     std::string GetRequestMessage() {
-        if(!BuildHttpRequest()) {
-
-        }
-        else {
-            return m_http_reqeuest_message;
-        }
+        return m_http_reqeuest_message;
     }
 
     /**
@@ -69,7 +56,6 @@ struct HttpRequest {
             {"Version", ""},
             {"Host", ""},
             {"Connection", ""},
-            {"ContentLength", ""},
             {"ContentType", ""},
             {"UserAgent", ""},
             {"Accept", ""},
@@ -82,7 +68,6 @@ struct HttpRequest {
         m_http_request_line_protocol_version = http_request_map["Version"];
         m_http_request_header_host = http_request_map["Host"];
         m_http_request_header_connection = http_request_map["Connection"];
-        m_http_request_header_content_length = http_request_map["ContentLength"];
         m_http_request_header_content_type = http_request_map["ContentType"];
         m_http_request_header_user_agent = http_request_map["UserAgent"];
         m_http_request_header_accept = http_request_map["Accept"];
@@ -114,21 +99,21 @@ struct HttpRequest {
      * @return false 
      */
     bool BuildHttpRequestHeader() {
-        m_http_request_header += m_http_request_header_host;
+        m_http_request_header += "Host: " + m_http_request_header_host;
         m_http_request_header += Utils::LF;
-        m_http_request_header += m_http_request_header_connection;
+        m_http_request_header += "Connection: " + m_http_request_header_connection;
         m_http_request_header += Utils::LF;
-        m_http_request_header += m_http_request_header_content_length;
+        m_http_request_header += "Content-Length: " + m_http_request_header_content_length;
         m_http_request_header += Utils::LF;
-        m_http_request_header += m_http_request_header_content_type;
+        m_http_request_header += "Content-Type: " + m_http_request_header_content_type;
         m_http_request_header += Utils::LF;
-        m_http_request_header += m_http_request_header_user_agent;
+        m_http_request_header += "User-Agent: " + m_http_request_header_user_agent;
         m_http_request_header += Utils::LF;
-        m_http_request_header += m_http_request_header_accept;
+        m_http_request_header += "Accept: " + m_http_request_header_accept;
         m_http_request_header += Utils::LF;
-        m_http_request_header += m_http_request_header_referer;
+        m_http_request_header += "Referer: " + m_http_request_header_referer;
         m_http_request_header += Utils::LF;
-        m_http_request_header += m_http_request_header_accept_language;
+        m_http_request_header += "Accept-Language: " + m_http_request_header_accept_language;
         m_http_request_header += Utils::LF;
         return true;
     }
@@ -171,6 +156,7 @@ struct HttpRequest {
         m_http_reqeuest_message += m_http_request_header;
         m_http_reqeuest_message += m_http_reqeuest_blankline;
         m_http_reqeuest_message += m_http_reqeuest_body;
+        return true;
     }
 
     /**
