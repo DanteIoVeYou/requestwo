@@ -1,4 +1,5 @@
 #include "unittest.h"
+#include "httpRequest.h"
 #include "requestwo.h"
 
 /**
@@ -66,6 +67,8 @@ bool UnitTest::TestParseURL4() {
  * @return false 
  */
 bool UnitTest::TestBuildHttpRequest() {
-
+    HttpRequest req;
+    req.BuildHttpRequest();
+    std::cout << req.GetRequestMessage() << std::endl;
     return true;
 }

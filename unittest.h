@@ -45,6 +45,7 @@ public:
      */
     bool TestBuildHttpRequest();
 
+
 public:
     /**
      * @brief a unittest URL
