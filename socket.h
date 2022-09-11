@@ -36,4 +36,12 @@ public:
      * @param port 
      */
     static void Connect(int fd, std::string ip, uint16_t port);
+
+    /**
+     * @brief 发送信息
+     * 
+     * @param fd
+     * @param message
+     */
+    static bool Send(int fd, std::string message);
 };

@@ -56,3 +56,22 @@ void Socket::Connect(int fd, std::string ip, uint16_t port) {
         std::cout << "connect failed" << std::endl; 
     }
 }
+
+/**
+ * @brief 发送信息
+ * 
+ * @param fd
+ * @param message
+ */
+bool Socket::Send(int fd, std::string message) {
+    char ch = 0;
+    for (int i = 0; i < message.size(); i++)
+    {
+        ch = message[i];
+        int ret = send(fd, &ch, 1, 0);
+        if(ret == -1) {
+            return false;
+        }
+    }
+    return true;
+}
