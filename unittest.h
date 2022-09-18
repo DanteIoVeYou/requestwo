@@ -45,6 +45,8 @@ public:
      */
     bool TestBuildHttpRequest();
 
+    bool TestSendAndRecv();
+
 
 public:
     /**

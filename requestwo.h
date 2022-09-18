@@ -7,6 +7,8 @@
 #include <cstring>
 #include "utils.h"
 #include "socket.h"
+#include "httpRequest.h"
+#include "httpResponse.h"
 
 class Requestwo {
 

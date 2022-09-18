@@ -1,6 +1,8 @@
 #include "unittest.h"
 #include "httpRequest.h"
 #include "requestwo.h"
+#include <cstdlib>
+#include <unistd.h>
 
 /**
  * @brief test URL
@@ -67,8 +69,16 @@ bool UnitTest::TestParseURL4() {
  * @return false 
  */
 bool UnitTest::TestBuildHttpRequest() {
-    HttpRequest req;
-    req.BuildHttpRequest();
+    HttpRequest req(Utils::configFileName);
     std::cout << req.GetRequestMessage() << std::endl;
+    return true;
+}
+
+bool UnitTest::TestSendAndRecv() {
+    // for(int i = 0; i < 100; i++) {
+        // Requestwo requestwo("www.baidu.com");
+        Requestwo requestwo("www.qq.com");
+        // usleep(600000);
+    // }
     return true;
 }

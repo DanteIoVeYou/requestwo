@@ -10,8 +10,13 @@ struct HttpRequest {
      * @brief Construct a new Http Request object
      * 
      */
-    HttpRequest() {
+    HttpRequest(std::string config_filename) {
+        bool ret = ParseConfigFile(config_filename);
+        if(!ret) {
+            // error
+        }
         std::transform(m_http_request_line_method.begin(), m_http_request_line_method.end(), m_http_request_line_method.begin(), ::toupper);
+        BuildHttpRequest();
     }
 
     /**
@@ -49,7 +54,7 @@ struct HttpRequest {
      * @return true 
      * @return false 
      */
-    bool ParseConfigFile() {
+    bool ParseConfigFile(std::string config_filename) {
         std::unordered_map<std::string, std::string> http_request_map = {
             {"Method", ""},
             {"Path", ""},
@@ -62,7 +67,7 @@ struct HttpRequest {
             {"Referer", ""},
             {"AcceptLanguage", ""}
         };
-        Utils::ReadConfigFile(Utils::configFileName, http_request_map);
+        Utils::ReadConfigFile(config_filename, http_request_map);
         m_http_request_line_method = http_request_map["Method"];
         m_http_request_line_path = http_request_map["Path"];
         m_http_request_line_protocol_version = http_request_map["Version"];
@@ -169,7 +174,6 @@ struct HttpRequest {
      * @return false 
      */
     bool BuildHttpRequest () {
-        ParseConfigFile();
         BuildHttpRequestLine();
         if(m_http_request_line_method == "GET") {
             BuildHttpRequestHeaderGET();
@@ -186,6 +190,7 @@ struct HttpRequest {
         m_http_reqeuest_message += m_http_reqeuest_body;
         return true;
     }
+
 
     /**
      * @brief http报文
